@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Students Logs</title>
+    <title>Students Of SMKWMS2</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -50,37 +50,32 @@
                 
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Students</h1>
+                    <p class="mb-4">List of students in SMK Wangsa Maju Seksyen 2.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"> Add New Student</i></button>
+                            <h6 class="m-0 font-weight-bold text-primary">Students Information</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Class</th>
-                                            <th>RFID Code</th>
-                                            <th>Form</th>
-                                            <th>Enter Time</th>
-                                            <th>Exit Time</th>
+                                            <th>Nama</th>
+                                            <th>Kelas</th>
+                                            <th>Kod RFID</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                    <tr>
+                                            <th>Nama</th>
+                                            <th>Kelas</th>
+                                            <th>Kod RFID</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -88,27 +83,48 @@
                                             <td>Tiger Nixon</td>
                                             <td>System Architect</td>
                                             <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>
+                                                <button class="btn btn-primary"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>                                                
+                                            </td>
+                                            
                                         </tr>
                                         <tr>
                                             <td>Garrett Winters</td>
                                             <td>Accountant</td>
                                             <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
+                                            </td>
+                                            
+                                            
                                         </tr>
                                         <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
                                             <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Senior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
+                                            </td>
+                                            
+                                            
                                         </tr>
                                         
+                                        
+                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -129,6 +145,39 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Class:</label>
+            <input type="text" class="form-control" placeholder="Enter Class">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">RFID Code:</label>
+            <input type="text" class="form-control" placeholder="Enter RFID Code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

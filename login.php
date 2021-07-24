@@ -26,10 +26,15 @@
         }
         
         body {
-            background: url(https://tse2.mm.bing.net/th?id=OIP.mI5uIcENagtS6WR7pAvUngHaE8&pid=Api&P=0&w=271&h=181);
-            background-size: contain;
+            background: url(https://hdwallpaperim.com/wp-content/uploads/2017/08/23/458541-classroom-clear_sky-anime_art.jpg);
+            background-size: cover;
             background-position: center;
         }
+
+        .dotted {
+            outline-style: dotted;
+        }
+        
     </style>
 
 </head>
@@ -41,14 +46,14 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9" style="margin-top: 15%;">
+            <div class="col-xl-10 col-lg-12 col-md-9" style="margin-top: 20%;">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-3">
+                    <div class="card-body p-4">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-image"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 rounded bg-gray-300">
                                 <div class="p-5 text-center">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome To SMKWMS2 Attandance System!</h1>
@@ -67,7 +72,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-danger btn-user btn-block">
+                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
                                     </form>
