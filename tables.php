@@ -50,10 +50,8 @@
                 
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Logs And Activities</h1>
+                    <p class="mb-4">All students information and activities such as time they arrived and exit from school will be recorded here.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 border-left-primary">

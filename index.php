@@ -127,10 +127,10 @@
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4 border-left-info">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Attend Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-info">Attend Overview</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -155,7 +155,7 @@
 
                         <!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4 border-left-primary">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Log Overview</h6>
@@ -179,13 +179,13 @@
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
+                                            <i class="fas fa-circle text-primary"></i> Attend
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
+                                            <i class="fas fa-circle text-warning"></i> Absent
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
+                                            <i class="fas fa-circle text-danger"></i> Skipping
                                         </span>
                                     </div>
                                 </div>
@@ -196,9 +196,9 @@
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col-lg-8"> 
-                        <div class="card shadow mb-4">
+                        <div class="card shadow mb-4 border-left-success">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Student Logs</h6>
+                            <h6 class="m-0 font-weight-bold text-success">Student Logs</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -258,18 +258,16 @@
                         <div class="col-lg-4 mb-4">
 
                             <!-- Illustrations -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4 border-left-warning">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Credits</h6>
+                                    <h6 class="m-0 font-weight-bold text-warning">Credits</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
                                     </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely
-                                        free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <p>This project is from SMK Wangsa Maju Seksyen 2 and made by the members of 'STEM' team.</p>
+                                    <button class="btn btn-warning" href="https://www.facebook.com/Wangsarians">To Learn More About School, Click Here &rarr;</button>
                                 </div>
                             </div>
 
