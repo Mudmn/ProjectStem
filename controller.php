@@ -37,8 +37,19 @@ class controller{
 		}
 
         public function updateStudent($conn){
-            
+            $name = $this->valdata($conn, $_POST['name']);
+            $class = $this->valdata($conn, $_POST['class']);
+            $form = $this->valdata($conn, $_POST['form']);
+            $rfid = $this->valdata($conn, $_POST['rfid']);
+            $id = $this->valdata($conn, $_POST['id']);
         }
+
+        
+
+
+
+
+
 
 		public function getOneData($conn, $query){
 			

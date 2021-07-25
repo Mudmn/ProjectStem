@@ -90,22 +90,22 @@ if(isset($_GET['id'])){
                             <form method="post" action="controller.php?mod=updateStudent">
     <div class="form-group col-md-12">
       <label for="inputEmail4">Name</label>
-      <input type="text" class="form-control" id="inputEmail4" placeholder="Name...." value="<?= $student['name'] ?>">
+      <input name="name" type="text" class="form-control" id="inputEmail4" placeholder="Name...." value="<?= $student['name'] ?>">
     </div>
 
   </div>
   <div class="form-group">
     <label for="inputAddress">Rfid Code</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Rfid...." value="<?= $student['rfid'] ?>" >
+    <input name="rfid" type="text" class="form-control" id="inputAddress" placeholder="Enter Rfid...." value="<?= $student['rfid'] ?>" >
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Class</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input name="class" type="text" class="form-control" id="inputCity">
     </div>
     <div class="form-group col-md-6">
       <label for="inputState">Form</label>
-      <select id="inputState" class="form-control">
+      <select name="form" id="inputState" class="form-control">
       <option <?= ($student['form'] == 1) ? 'selected' : '' ?> value="1">1</option>
       <option <?= ($student['form'] == 2) ? 'selected' : '' ?> value="2">2</option>
       <option <?= ($student['form'] == 3) ? 'selected' : '' ?> value="3">3</option>
