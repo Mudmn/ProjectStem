@@ -32,7 +32,7 @@
 
 <!-- Nav Item - Tables / Logs-->
 <li class="nav-item">
-    <a class="nav-link" href="tables.php">
+    <a class="nav-link" href="logs.php">
         <i class="fas fa-fw fa-table"></i>
         <span>Logs</span></a>
 </li>
