@@ -14,6 +14,10 @@ class controller{
 
 					//---------------- START BASIC PART ----------------
 
+                    case 'addStudent':
+						$this->addStudent($conn);
+						break;
+
 					case 'login':
 						$this->login($conn);
 						break;
@@ -42,6 +46,19 @@ class controller{
 				return 0;
 			}
 		}
+
+        public function addStudent($conn){
+            $name = $this->valdata($conn, $_POST['name']);
+            $class = $this->valdata($conn, $_POST['class']);
+            $form = $this->valdata($conn, $_POST['form']);
+            $rfid = $this->valdata($conn, $_POST['rfid']);
+
+            $sql = "INSERT INTO students (name,class,form,rfid) VALUES (?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $rs = $stmt->execute([$name, $class, $form, $rfid]);
+
+            $this->redirect('students.php', 'Successfully added');
+        }
 
 		public function getListData($conn, $query){
 			

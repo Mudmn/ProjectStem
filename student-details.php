@@ -64,9 +64,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                 <!-- Begin Page Content -->
 
                 <div class="container-fluid">
-
-                
-
+       
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Students</h1>
                     <p class="mb-4">List of students in SMK Wangsa Maju Seksyen 2.</p>
@@ -74,57 +72,49 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 border-left-primary">
                         <div class="card-header py-3">
-                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"></i> Add Student</button>
+                            
                             <h6 class="m-0 font-weight-bold text-primary">Students Information</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>Form</th>
-                                            <th>Kod RFID</th>
-                                            <th>Action</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                            <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>Form</th>
-                                            <th>Kod RFID</th>
-                                            <th>Action</th>
-                                            
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php
-                                        if($students != null){
-                                            foreach($students as $student){ ?>
-                                            <tr>
-                                            <td><?= $student['name'] ?></td>
-                                            <td><?= $student['class'] ?></td>
-                                            <td><?= $student['form'] ?></td>
-                                            <td><?= $student['rfid'] ?></td>
-                                            
-                                            
-                                            <td>
-                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
-                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                <?php } } ?>
-                                        
-                                        
-                                    
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="col-lg-6"><form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input type="Name...." class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password...." class="form-control" id="inputPassword4" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Rfid Code</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Rfid....">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Class</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputState">Form</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form></div>                           
                         </div>
                     </div>
 
