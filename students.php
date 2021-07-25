@@ -54,9 +54,9 @@
                     <p class="mb-4">List of students in SMK Wangsa Maju Seksyen 2.</p>
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4 border-left-primary">
                         <div class="card-header py-3">
-                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"> Add New Student</i></button>
+                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"></i> Add Student</button>
                             <h6 class="m-0 font-weight-bold text-primary">Students Information</h6>
                         </div>
                         <div class="card-body">
@@ -84,8 +84,8 @@
                                             <td>System Architect</td>
                                             <td>Edinburgh</td>
                                             <td>
-                                                <button class="btn btn-primary"><i class="fas fa-user-cog"></i></button>
-                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>                                                
+                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
                                             </td>
                                             
                                         </tr>
@@ -94,7 +94,7 @@
                                             <td>Accountant</td>
                                             <td>Tokyo</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
                                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
                                             </td>
                                             
@@ -105,7 +105,7 @@
                                             <td>Junior Technical Author</td>
                                             <td>San Francisco</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
                                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
                                             </td>
                                             
@@ -116,7 +116,7 @@
                                             <td>Senior Javascript Developer</td>
                                             <td>Edinburgh</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
                                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
                                             </td>
                                             

@@ -22,7 +22,7 @@
         .bg-image {
             background: url(https://scontent.fkul8-1.fna.fbcdn.net/v/t1.18169-9/11242780_1614244585509875_2839946622822169584_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFRy1cgWVxXGErZdbkR694ORPesySRGNXtE96zJJEY1e4ys5dtESwsJAdsFDS7JlLVgEbBVHxHxYJrKFbOLbI-H&_nc_ohc=CoTD1sNlxXwAX_ZbBg0&_nc_ht=scontent.fkul8-1.fna&oh=e2f842a6c48bcc306fba36b6d469a836&oe=60FE0648);
             background-position: center;
-            background-size: cover;
+            background-size: 424px;
         }
         
         body {
@@ -58,6 +58,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome To SMKWMS2 Attandance System!</h1>
                                     </div>
+                                    <hr>
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
@@ -76,7 +77,6 @@
                                             Login
                                         </a>
                                     </form>
-                                    <hr>
 
                                 </div>
                             </div>
