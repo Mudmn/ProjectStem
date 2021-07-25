@@ -112,7 +112,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                             
                                             
                                             <td>
-                                                <button class="btn btn-warning btn-sm"><i class="fas fa-user-cog"></i></button>
+                                                <a class="btn btn-warning btn-sm" href="student-details.php?id=<?= $student['id'] ?>"><i class="fas fa-user-cog"></i></a>
                                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
                                             </td>
                                             

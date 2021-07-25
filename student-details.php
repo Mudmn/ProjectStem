@@ -10,7 +10,17 @@ if(!isset($_SESSION['user_id'])){
 $controller = new controller();
 $conn = $controller->open();
 
-$students = $controller->getListData($conn, "SELECT * FROM students");
+$student = "";
+if(isset($_GET['id'])){
+    $student = $controller->getOneData($conn, "SELECT * FROM students WHERE id= ". $_GET['id']);
+
+    if($student == null){
+        echo "<script>window.location = 'students.php</script>";
+    }
+
+} else {
+    echo "<script>window.location = 'students.php'</script>";
+}
 
 
 
@@ -73,23 +83,20 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                     <div class="card shadow mb-4 border-left-primary">
                         <div class="card-header py-3">
                             
-                            <h6 class="m-0 font-weight-bold text-primary">Students Information</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Students Information : </h6>
                         </div>
                         <div class="card-body">
-                            <div class="col-lg-6"><form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
+                            <div class="col-lg-6">
+                            <form method="post" action="controller.php?mod=updateStudent">
+    <div class="form-group col-md-12">
       <label for="inputEmail4">Name</label>
-      <input type="Name...." class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Name...." value="<?= $student['name'] ?>">
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password...." class="form-control" id="inputPassword4" placeholder="Password">
-    </div>
+
   </div>
   <div class="form-group">
     <label for="inputAddress">Rfid Code</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Rfid....">
+    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Rfid...." value="<?= $student['rfid'] ?>" >
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -99,21 +106,19 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
     <div class="form-group col-md-6">
       <label for="inputState">Form</label>
       <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <option <?= ($student['form'] == 1) ? 'selected' : '' ?> value="1">1</option>
+      <option <?= ($student['form'] == 2) ? 'selected' : '' ?> value="2">2</option>
+      <option <?= ($student['form'] == 3) ? 'selected' : '' ?> value="3">3</option>
+      <option <?= ($student['form'] == 4) ? 'selected' : '' ?> value="4">4</option>
+      <option <?= ($student['form'] == 5) ? 'selected' : '' ?> value="5">5</option>
+    
       </select>
     </div>
     
   </div>
   <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <button type="submit" class="btn btn-primary">Update</button>
 </form></div>                           
                         </div>
                     </div>
@@ -169,7 +174,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
           </div>               
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" name="id" value="<?= $student['id'] ?>">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
       </form>

@@ -14,6 +14,10 @@ class controller{
 
 					//---------------- START BASIC PART ----------------
 
+                    case 'updateStudent':
+                        $this->updateStudent($conn);
+                        break;
+                    
                     case 'addStudent':
 						$this->addStudent($conn);
 						break;
@@ -31,6 +35,10 @@ class controller{
 				}
 			}
 		}
+
+        public function updateStudent($conn){
+            
+        }
 
 		public function getOneData($conn, $query){
 			
