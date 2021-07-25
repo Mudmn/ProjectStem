@@ -14,6 +14,10 @@ class controller{
 
 					//---------------- START BASIC PART ----------------
 
+                    case 'deleteStudent':
+                        $this->deleteStudent($conn);
+                        break;
+
                     case 'updateStudent':
                         $this->updateStudent($conn);
                         break;
@@ -36,20 +40,32 @@ class controller{
 			}
 		}
 
+
+        public function deleteStudent($conn){
+            $id = $this->valdata($conn, $_GET['id']);
+            
+            $sql = "DELETE FROM students WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $rs = $stmt->execute([$id]);
+
+            $this->redirect('students.php','Successfully Deleted');
+        }
+
+
+
         public function updateStudent($conn){
             $name = $this->valdata($conn, $_POST['name']);
             $class = $this->valdata($conn, $_POST['class']);
             $form = $this->valdata($conn, $_POST['form']);
             $rfid = $this->valdata($conn, $_POST['rfid']);
             $id = $this->valdata($conn, $_POST['id']);
+
+            $sql = "UPDATE students SET name = ?, class = ?, form = ?, rfid = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $rs = $stmt->execute([$name, $class, $form, $rfid, $id]);
+
+            $this->redirect('students.php', 'Successfully Updated');
         }
-
-        
-
-
-
-
-
 
 		public function getOneData($conn, $query){
 			

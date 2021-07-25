@@ -113,7 +113,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                             
                                             <td>
                                                 <a class="btn btn-warning btn-sm" href="student-details.php?id=<?= $student['id'] ?>"><i class="fas fa-user-cog"></i></a>
-                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>                                                
+                                                <a class="btn btn-danger btn-sm" href="controller.php?mod=deleteStudent&id=<?=$student['id']?>" onclick="return confirm('Are You Sure?')"><i class="fas fa-trash"></i></a>                                                
                                             </td>
                                             
                                         </tr>
