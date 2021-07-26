@@ -10,7 +10,9 @@ if(!isset($_SESSION['user_id'])){
 $controller = new controller();
 $conn = $controller->open();
 
+$logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT JOIN students on (logs.student_id = students.id) WHERE logs.exit_time IS NOT NULL ORDER BY logs.log_date DESC");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,44 +85,35 @@ $conn = $controller->open();
                                             <th>Form</th>
                                             <th>Enter Time</th>
                                             <th>Exit Time</th>
+                                            <th>Remarks</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
+                                    <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Class</th>
+                                            <th>RFID Code</th>
+                                            <th>Form</th>
+                                            <th>Enter Time</th>
+                                            <th>Exit Time</th>
+                                            <th>Remarks</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        
+                                    <?php
+                                        if($logs != null){
+                                            foreach($logs as $log){ ?>
+                                         <tr>
+                                            <td><?= $log['name'] ?></td>
+                                            <td><?= $log['class'] ?></td>
+                                            <td><?= $log['rfid'] ?></td>
+                                            <td><?= $log['form'] ?></td>
+                                            <td><?= $log['enter_time'] ?></td>
+                                            <td><?= $log['exit_time'] ?></td>
+                                            <td><?= $log['remark'] ?></td>
+                                        </tr>                                       
+                                <?php } } ?>
+            
                                     </tbody>
                                 </table>
                             </div>
