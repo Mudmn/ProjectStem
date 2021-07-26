@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 
 $config = new controller();
@@ -13,6 +13,9 @@ class controller{
 				switch ($action) {
 
 					//---------------- START BASIC PART ----------------
+					case 'rfidTrigger':
+						$this->rfidTrigger($conn);
+						break;
 
                     case 'deleteStudent':
                         $this->deleteStudent($conn);
@@ -40,18 +43,46 @@ class controller{
 			}
 		}
 
+		public function rfidTrigger($conn){
+			if(!isset($_GET['rfid'])){
+				return false;
+				exit;
+			}
+
+			$rfid = $this->valdata($conn, $_GET['rfid']);
+			$student = $this->getOneData($conn, "SELECT * FROM students WHERE rfid = '$rfid'");
+			if($student == null){
+				return false;
+				exit;
+			}
+
+			$sql = "SELECT * FROM logs WHERE student_id = ? AND exit_time IS NULL ORDER BY log_date DESC LIMIT 1";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute([$student['id']]);
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			if($row){
+				$updateSql = "UPDATE logs SET exit_time = NOW() WHERE id = ?";
+				$updateStmt = $conn->prepare($updateSql);
+				$updateRs = $updateStmt->execute([$row['id']]);
+			} else {
+				$insertSql = "INSERT INTO logs (student_id, enter_time) VALUES (?,NOW())";
+				$insertStmt = $conn->prepare($insertSql);
+				$insertRs = $insertStmt->execute([$student['id']]);
+			}
+
+			return true;
+		}
 
         public function deleteStudent($conn){
             $id = $this->valdata($conn, $_GET['id']);
             
             $sql = "DELETE FROM students WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$id]);
+            $stmt->execute([$id]);
 
             $this->redirect('students.php','Successfully Deleted');
         }
-
-
 
         public function updateStudent($conn){
             $name = $this->valdata($conn, $_POST['name']);
@@ -65,6 +96,19 @@ class controller{
             $rs = $stmt->execute([$name, $class, $form, $rfid, $id]);
 
             $this->redirect('students.php', 'Successfully Updated');
+        }
+
+        public function addStudent($conn){
+            $name = $this->valdata($conn, $_POST['name']);
+            $class = $this->valdata($conn, $_POST['class']);
+            $form = $this->valdata($conn, $_POST['form']);
+            $rfid = $this->valdata($conn, $_POST['rfid']);
+
+            $sql = "INSERT INTO students (name,class,form,rfid) VALUES (?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $rs = $stmt->execute([$name, $class, $form, $rfid]);
+
+            $this->redirect('students.php', 'Successfully added');
         }
 
 		public function getOneData($conn, $query){
@@ -81,19 +125,6 @@ class controller{
 				return 0;
 			}
 		}
-
-        public function addStudent($conn){
-            $name = $this->valdata($conn, $_POST['name']);
-            $class = $this->valdata($conn, $_POST['class']);
-            $form = $this->valdata($conn, $_POST['form']);
-            $rfid = $this->valdata($conn, $_POST['rfid']);
-
-            $sql = "INSERT INTO students (name,class,form,rfid) VALUES (?,?,?,?)";
-            $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$name, $class, $form, $rfid]);
-
-            $this->redirect('students.php', 'Successfully added');
-        }
 
 		public function getListData($conn, $query){
 			
@@ -199,9 +230,9 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "projectstem";
+			$dbname = "stem-project";
 			$username = "root";
-			$password = "";
+			$password = "root";
 
 			try {
 			    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
