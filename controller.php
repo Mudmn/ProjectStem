@@ -13,6 +13,14 @@ class controller{
 				switch ($action) {
 
 					//---------------- START BASIC PART ----------------
+					case 'overviewDashboard':
+						$this->overviewDashboard($conn);
+						break;
+
+					case 'forceExit':
+						$this->forceExit($conn);
+						break;
+
 					case 'rfidTrigger':
 						$this->rfidTrigger($conn);
 						break;
@@ -43,6 +51,67 @@ class controller{
 			}
 		}
 
+		public function sendNotificationTelegram($method, $data){
+
+			$BOT_TOKEN = "1291188439:AAF3CdgRAqcX858oM36VQ-m9LlKvViUMsFA";
+	
+			$url = "https://api.telegram.org/bot$BOT_TOKEN/$method";
+		
+			if(!$curld = curl_init()){
+				exit;
+			}
+
+			curl_setopt($curld, CURLOPT_POST, true);
+			curl_setopt($curld, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($curld, CURLOPT_URL, $url);
+			curl_setopt($curld, CURLOPT_RETURNTRANSFER, true);
+			$output = curl_exec($curld);
+			curl_close($curld);
+			return $output;
+		}
+
+		public function overviewDashboard($conn){
+
+			$rows = array();
+			$sql = "SELECT logs.*, students.name AS name, students.class AS class, students.form AS form, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute();
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+				$rows[] = $row;
+			}
+
+			$totalStudent = $this->getCount($conn, 'students');
+			$totalActiveNotification = $this->getCount($conn, 'students', 'WHERE tele_id IS NOT NULL');
+			$totalAttend = $this->getCountAttend($conn);
+			if($totalAttend['total'] <= 0){
+				$totalAbsent = 0;
+			} else {
+				$totalAbsent = $totalStudent['total'] - $totalAttend['total'];
+			}
+
+			$data = [
+				'listAttend' => $rows,
+				'totalStudent' => $totalStudent,
+				'totalActiveNotification' => $totalActiveNotification,
+				'totalAttend' => $totalAttend,
+				'totalAbsent' => $totalAbsent
+			];
+
+			echo json_encode($data);
+		}
+
+		public function forceExit($conn){
+			$id = $this->valdata($conn, $_GET['id']);
+			$user = $this->getAuth($conn);
+
+			$remark = "Exit by " . $user['name'];
+			$updateSql = "UPDATE logs SET exit_time = NOW(), remark = ? WHERE id = ?";
+			$updateStmt = $conn->prepare($updateSql);
+			$updateRs = $updateStmt->execute([$remark, $id]);
+
+			$this->redirect('index.php', 'successful force exit');
+		}
+
 		public function rfidTrigger($conn){
 			if(!isset($_GET['rfid'])){
 				return false;
@@ -65,14 +134,48 @@ class controller{
 				$updateSql = "UPDATE logs SET exit_time = NOW() WHERE id = ?";
 				$updateStmt = $conn->prepare($updateSql);
 				$updateRs = $updateStmt->execute([$row['id']]);
+
+				// If already set for notification
+				if($student['tele_id'] != null){
+
+					$message = "Hai, " . $student['name'] . " exit from school at : " . date("h:i:s a");
+
+					$param = array(
+						"chat_id" => $student['tele_id'],
+						"text" => $message,
+						"parse_mode" => "HTML"
+					);
+
+					print_r($param);
+
+					$this->sendNotificationTelegram("sendMessage", $param);
+				}
 			} else {
 				$insertSql = "INSERT INTO logs (student_id, enter_time) VALUES (?,NOW())";
 				$insertStmt = $conn->prepare($insertSql);
 				$insertRs = $insertStmt->execute([$student['id']]);
+
+				// If already set for notification
+				if($student['tele_id'] != null){
+
+					$message = "Hai, " . $student['name'] . " arrive at school at : " . date("h:i:s a");
+
+					$param = array(
+						"chat_id" => $student['tele_id'],
+						"text" => $message,
+						"parse_mode" => "HTML"
+					);
+
+					print_r($param);
+
+					$this->sendNotificationTelegram("sendMessage", $param);
+				}
 			}
 
+			
 			return true;
 		}
+
 
         public function deleteStudent($conn){
             $id = $this->valdata($conn, $_GET['id']);
@@ -85,15 +188,17 @@ class controller{
         }
 
         public function updateStudent($conn){
+
             $name = $this->valdata($conn, $_POST['name']);
             $class = $this->valdata($conn, $_POST['class']);
             $form = $this->valdata($conn, $_POST['form']);
             $rfid = $this->valdata($conn, $_POST['rfid']);
+            $tele_id = $this->valdata($conn, $_POST['tele_id']);
             $id = $this->valdata($conn, $_POST['id']);
 
-            $sql = "UPDATE students SET name = ?, class = ?, form = ?, rfid = ? WHERE id = ?";
+            $sql = "UPDATE students SET name = ?, class = ?, form = ?, rfid = ?, tele_id = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$name, $class, $form, $rfid, $id]);
+            $rs = $stmt->execute([$name, $class, $form, $rfid, $tele_id, $id]);
 
             $this->redirect('students.php', 'Successfully Updated');
         }
@@ -103,10 +208,11 @@ class controller{
             $class = $this->valdata($conn, $_POST['class']);
             $form = $this->valdata($conn, $_POST['form']);
             $rfid = $this->valdata($conn, $_POST['rfid']);
+            $tele_id = $this->valdata($conn, $_POST['tele_id']);
 
-            $sql = "INSERT INTO students (name,class,form,rfid) VALUES (?,?,?,?)";
+            $sql = "INSERT INTO students (name,class,form,rfid, tele_id) VALUES (?,?,?,?,?)";
             $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$name, $class, $form, $rfid]);
+            $rs = $stmt->execute([$name, $class, $form, $rfid, $tele_id]);
 
             $this->redirect('students.php', 'Successfully added');
         }
@@ -143,6 +249,15 @@ class controller{
 
 		public function getCount($conn, $tableName, $where = null){
 			$sql = "SELECT count(id) as total FROM $tableName $where";
+	        $stmt = $conn->prepare($sql);
+	        $stmt->execute();
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+				return $row;	
+			}
+        }
+
+		public function getCountAttend($conn){
+			$sql = "SELECT count(DISTINCT student_id) as total FROM logs WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE)";
 	        $stmt = $conn->prepare($sql);
 	        $stmt->execute();
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -230,9 +345,9 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "ProjectStem";
+			$dbname = "stem-project";
 			$username = "root";
-			$password = "";
+			$password = "root";
 
 			try {
 			    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
