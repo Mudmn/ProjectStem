@@ -86,6 +86,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                             <th>Kelas</th>
                                             <th>Form</th>
                                             <th>Kod RFID</th>
+                                            <th>Telegram ID</th>
                                             <th>Action</th>
                                             
                                         </tr>
@@ -96,6 +97,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                             <th>Kelas</th>
                                             <th>Form</th>
                                             <th>Kod RFID</th>
+                                            <th>Telegram ID</th>
                                             <th>Action</th>
                                             
                                         </tr>
@@ -110,6 +112,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                             <td><?= $student['class'] ?></td>
                                             <td><?= $student['form'] ?></td>
                                             <td><?= $student['rfid'] ?></td>
+                                            <td><?= $student['tele_id'] ?></td>
                                             
                                             
                                             <td>
@@ -177,7 +180,11 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
           <div class="form-group">
             <label class="col-form-label">RFID Code:</label>
             <input required  name="rfid" type="text" class="form-control" placeholder="Enter RFID Code">
-          </div>               
+          </div>      
+          <div class="form-group">
+            <label class="col-form-label">Telegram ID <small class="text-danger">* For notification to telegram (Optional)</small></label>
+            <input  name="tele_id" type="text" class="form-control" placeholder="Enter Telegram ID">
+          </div>           
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

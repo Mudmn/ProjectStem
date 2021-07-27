@@ -98,6 +98,11 @@ if(isset($_GET['id'])){
                                         <input name="rfid" type="text" class="form-control" id="inputAddress"
                                             placeholder="Enter Rfid...." value="<?= $student['rfid'] ?>">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress">Telegram ID</label>
+                                        <input name="tele_id" type="text" class="form-control" id="inputAddress"
+                                            placeholder="Enter telegram ID...." value="<?= $student['tele_id'] ?>">
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">Class</label>
