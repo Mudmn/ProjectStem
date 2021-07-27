@@ -345,9 +345,9 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "stem-project";
+			$dbname = "ProjectStem";
 			$username = "root";
-			$password = "root";
+			$password = "";
 
 			try {
 			    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
