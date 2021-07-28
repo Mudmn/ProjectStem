@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 
 $config = new controller();
@@ -53,7 +53,7 @@ class controller{
 
 		public function sendNotificationTelegram($method, $data){
 
-			$BOT_TOKEN = "1291188439:AAF3CdgRAqcX858oM36VQ-m9LlKvViUMsFA";
+			$BOT_TOKEN = "1949918111:AAHEuuIFMtRgC9HBXOdY7zyg2Qa1IM-qrjU";
 	
 			$url = "https://api.telegram.org/bot$BOT_TOKEN/$method";
 		
@@ -73,7 +73,7 @@ class controller{
 		public function overviewDashboard($conn){
 
 			$rows = array();
-			$sql = "SELECT logs.*, students.name AS name, students.class AS class, students.form AS form, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL";
+			$sql = "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute();
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -109,6 +109,21 @@ class controller{
 			$updateStmt = $conn->prepare($updateSql);
 			$updateRs = $updateStmt->execute([$remark, $id]);
 
+			$student = $this->getOneData($conn, "SELECT students.* FROM logs LEFT JOIN students ON (logs.student_id = students.id) WHERE logs.id = $id");
+			
+			if($student['tele_id'] != null){
+
+				$message = "Hai for your information, " . $student['name'] . " from class ". $student['class'] ." not scan for exit time. So sistem will update the data for exit time on : " . date("h:i:s a") . ", By ". $user['name'];
+				// $message = "asdas";
+				$param = array(
+					"chat_id" => $student['tele_id'],
+					"text" => $message,
+					"parse_mode" => "HTML"
+				);
+
+				$this->sendNotificationTelegram("sendMessage", $param);
+			}
+
 			$this->redirect('index.php', 'successful force exit');
 		}
 
@@ -138,7 +153,7 @@ class controller{
 				// If already set for notification
 				if($student['tele_id'] != null){
 
-					$message = "Hai, " . $student['name'] . " exit from school at : " . date("h:i:s a");
+					$message = "Hai, " . $student['name'] . " from class ". $student['class'] ." exit from school at : " . date("h:i:s a");
 
 					$param = array(
 						"chat_id" => $student['tele_id'],
@@ -158,7 +173,7 @@ class controller{
 				// If already set for notification
 				if($student['tele_id'] != null){
 
-					$message = "Hai, " . $student['name'] . " arrive at school at : " . date("h:i:s a");
+					$message = "Hai, " . $student['name'] . " from class ". $student['class'] ." arrive at school at : " . date("h:i:s a");
 
 					$param = array(
 						"chat_id" => $student['tele_id'],
@@ -191,14 +206,13 @@ class controller{
 
             $name = $this->valdata($conn, $_POST['name']);
             $class = $this->valdata($conn, $_POST['class']);
-            $form = $this->valdata($conn, $_POST['form']);
             $rfid = $this->valdata($conn, $_POST['rfid']);
             $tele_id = $this->valdata($conn, $_POST['tele_id']);
             $id = $this->valdata($conn, $_POST['id']);
 
-            $sql = "UPDATE students SET name = ?, class = ?, form = ?, rfid = ?, tele_id = ? WHERE id = ?";
+            $sql = "UPDATE students SET name = ?, class = ?, rfid = ?, tele_id = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$name, $class, $form, $rfid, $tele_id, $id]);
+            $rs = $stmt->execute([$name, $class, $rfid, $tele_id, $id]);
 
             $this->redirect('students.php', 'Successfully Updated');
         }
@@ -206,13 +220,12 @@ class controller{
         public function addStudent($conn){
             $name = $this->valdata($conn, $_POST['name']);
             $class = $this->valdata($conn, $_POST['class']);
-            $form = $this->valdata($conn, $_POST['form']);
             $rfid = $this->valdata($conn, $_POST['rfid']);
             $tele_id = $this->valdata($conn, $_POST['tele_id']);
 
-            $sql = "INSERT INTO students (name,class,form,rfid, tele_id) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO students (name,class,rfid, tele_id) VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql);
-            $rs = $stmt->execute([$name, $class, $form, $rfid, $tele_id]);
+            $rs = $stmt->execute([$name, $class, $rfid, $tele_id]);
 
             $this->redirect('students.php', 'Successfully added');
         }
@@ -297,7 +310,7 @@ class controller{
 			if($user){
 				$_SESSION['user_id'] = $user['id'];
 
-				$message = "Hai ". $user['nama'] .", Welcome to";
+				$message = "Hai ". $user['name'] .", Welcome to SMKWMS2 Attandance System";
 				$this->redirect('index.php', $message);
 			} else {
 				
@@ -345,9 +358,9 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "ProjectStem";
+			$dbname = "stem-project";
 			$username = "root";
-			$password = "";
+			$password = "root";
 
 			try {
 			    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

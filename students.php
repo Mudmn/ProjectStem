@@ -49,7 +49,7 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
     <div id="wrapper">
 
         <?php include('sidebar.php');?>
-        
+
         <!-- foot -->
 
         <!-- Content Wrapper -->
@@ -60,12 +60,12 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
 
 
                 <?php include('topbar.php');?>
-                
+
                 <!-- Begin Page Content -->
 
                 <div class="container-fluid">
 
-                
+
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Students</h1>
@@ -74,7 +74,8 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 border-left-primary">
                         <div class="card-header py-3">
-                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"></i> Add Student</button>
+                            <button class="btn btn-primary btn-sm float-right" type="button" data-toggle="modal"
+                                data-target="#exampleModal"><i class="fas fa-user-plus"></i> Add Student</button>
                             <h6 class="m-0 font-weight-bold text-primary">Students Information</h6>
                         </div>
                         <div class="card-body">
@@ -83,49 +84,51 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>Form</th>
+                                            <th>class</th>
                                             <th>Kod RFID</th>
                                             <th>Telegram ID</th>
                                             <th>Action</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr>
+                                        <tr>
                                             <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>Form</th>
+                                            <th>class</th>
                                             <th>Kod RFID</th>
                                             <th>Telegram ID</th>
                                             <th>Action</th>
-                                            
+
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        
+
                                         <?php
                                         if($students != null){
                                             foreach($students as $student){ ?>
-                                            <tr>
+                                        <tr>
                                             <td><?= $student['name'] ?></td>
                                             <td><?= $student['class'] ?></td>
-                                            <td><?= $student['form'] ?></td>
                                             <td><?= $student['rfid'] ?></td>
                                             <td><?= $student['tele_id'] ?></td>
-                                            
-                                            
+
+
                                             <td>
-                                                <a class="btn btn-warning btn-sm" href="student-details.php?id=<?= $student['id'] ?>"><i class="fas fa-user-cog"></i></a>
-                                                <a class="btn btn-danger btn-sm" href="controller.php?mod=deleteStudent&id=<?=$student['id']?>" onclick="return confirm('Are You Sure?')"><i class="fas fa-trash"></i></a>                                                
+                                                <a class="btn btn-warning btn-sm"
+                                                    href="student-details.php?id=<?= $student['id'] ?>"><i
+                                                        class="fas fa-user-cog"></i></a>
+                                                <a class="btn btn-danger btn-sm"
+                                                    href="controller.php?mod=deleteStudent&id=<?=$student['id']?>"
+                                                    onclick="return confirm('Are You Sure?')"><i
+                                                        class="fas fa-trash"></i></a>
                                             </td>
-                                            
+
                                         </tr>
-                                        
-                                <?php } } ?>
-                                        
-                                        
-                                    
+
+                                        <?php } } ?>
+
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -147,53 +150,55 @@ $students = $controller->getListData($conn, "SELECT * FROM students");
     </div>
     <!-- End of Page Wrapper -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-      <form method="post" action="controller.php?mod=addStudent">
-      <div class="modal-body">      
-          <div class="form-group">
-            <label class="col-form-label">Name:</label>
-            <input required name="name"type="text" class="form-control" placeholder="Enter Name">
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Class:</label>
-            <input required  name="class" type="text" class="form-control" placeholder="Enter Class">        
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Form:</label>
-            <select required  name="form"d id="" class="form-control">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">RFID Code:</label>
-            <input required  name="rfid" type="text" class="form-control" placeholder="Enter RFID Code">
-          </div>      
-          <div class="form-group">
-            <label class="col-form-label">Telegram ID <small class="text-danger">* For notification to telegram (Optional)</small></label>
-            <input  name="tele_id" type="text" class="form-control" placeholder="Enter Telegram ID">
-          </div>           
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-      </form>
+                <form method="post" action="controller.php?mod=addStudent">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-form-label">Name:</label>
+                            <input required name="name" type="text" class="form-control" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Form:</label>
+                            <select required name="class" d id="" class="form-control">
+                                <option value="1 Amanah">1 Amanah</option>
+                                <option value="1 Wangsa">1 Wangsa</option>
+                                <option value="1 MAJU">1 MAJU</option>
+                                <option value="2 Amanah">2 Amanah</option>
+                                <option value="2 Wangsa">2 Wangsa</option>
+                                <option value="2 MAJU">2 MAJU</option>
+                                <option value="3 Amanah">3 Amanah</option>
+                                <option value="3 Wangsa">3 Wangsa</option>
+                                <option value="3 MAJU">3 MAJU</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">RFID Code:</label>
+                            <input required name="rfid" type="text" class="form-control" placeholder="Enter RFID Code">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Telegram ID <small class="text-danger">* For notification to
+                                    telegram (Optional)</small></label>
+                            <input name="tele_id" type="text" class="form-control" placeholder="Enter Telegram ID">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
