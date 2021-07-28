@@ -82,7 +82,6 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <th>Name</th>
                                             <th>Class</th>
                                             <th>RFID Code</th>
-                                            <th>Form</th>
                                             <th>Enter Time</th>
                                             <th>Exit Time</th>
                                             <th>Remarks</th>
@@ -93,7 +92,6 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <th>Name</th>
                                             <th>Class</th>
                                             <th>RFID Code</th>
-                                            <th>Form</th>
                                             <th>Enter Time</th>
                                             <th>Exit Time</th>
                                             <th>Remarks</th>
@@ -107,7 +105,6 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <td><?= $log['name'] ?></td>
                                             <td><?= $log['class'] ?></td>
                                             <td><?= $log['rfid'] ?></td>
-                                            <td><?= $log['form'] ?></td>
                                             <td><?= $log['enter_time'] ?></td>
                                             <td><?= $log['exit_time'] ?></td>
                                             <td><?= $log['remark'] ?></td>

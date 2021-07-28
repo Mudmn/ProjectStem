@@ -105,17 +105,17 @@ if(isset($_GET['id'])){
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputCity">Class</label>
-                                            <input name="class" type="text" class="form-control" id="inputCity" value="<?= $student['class'] ?>">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="inputState">Form</label>
-                                            <select name="form" id="inputState" class="form-control">
-                                                <option <?= ($student['form'] == 1) ? 'selected' : '' ?> value="1">1</option>
-                                                <option <?= ($student['form'] == 2) ? 'selected' : '' ?> value="2">2</option>
-                                                <option <?= ($student['form'] == 3) ? 'selected' : '' ?> value="3">3</option>
-                                                <option <?= ($student['form'] == 4) ? 'selected' : '' ?> value="4">4</option>
-                                                <option <?= ($student['form'] == 5) ? 'selected' : '' ?> value="5">5</option>
+                                            <label for="inputState">Class</label>
+                                            <select name="class" id="inputState" class="form-control">
+                                                <option <?= ($student['class'] == "1 Amanah") ? 'selected' : '' ?> value="1 Amanah">1 Amanah</option>
+                                                <option <?= ($student['class'] == "1 Wangsa") ? 'selected' : '' ?> value="1 Wangsa">1 Wangsa</option>
+                                                <option <?= ($student['class'] == "1 Maju") ? 'selected' : '' ?> value="1 Maju">1 Maju</option>
+                                                <option <?= ($student['class'] == "2 Amanah") ? 'selected' : '' ?> value="2 Amanah">2 Amanah</option>
+                                                <option <?= ($student['class'] == "2 Wangsa") ? 'selected' : '' ?> value="2 Wangsa">2 Wangsa</option>
+                                                <option <?= ($student['class'] == "2 Maju") ? 'selected' : '' ?> value="2 Maju">2 Maju</option>
+                                                <option <?= ($student['class'] == "3 Amanah") ? 'selected' : '' ?> value="3 Amanah">3 Amanah</option>
+                                                <option <?= ($student['class'] == "3 Wangsa") ? 'selected' : '' ?> value="3 Wangsa">3 Wangsa</option>
+                                                <option <?= ($student['class'] == "3 Maju") ? 'selected' : '' ?> value="3 Maju">3 Maju</option>
                                             </select>
                                         </div>
                                     </div>

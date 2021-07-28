@@ -9,7 +9,7 @@ if(!isset($_SESSION['user_id'])){
 
 $controller = new controller();
 $conn = $controller->open();
-$logs = $controller->getListData($conn, "SELECT logs.*, students.name AS name, students.class AS class, students.form AS form, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL");
+$logs = $controller->getListData($conn, "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL");
 $totalStudent = $controller->getCount($conn, 'students');
 $totalActiveNotification = $controller->getCount($conn, 'students', 'WHERE tele_id IS NOT NULL');
 $totalAttend = $controller->getCountAttend($conn);
@@ -164,7 +164,6 @@ $totalAbsent = $totalStudent['total'] - $totalAttend['total'];
                                                     <th>Name</th>
                                                     <th>Class</th>
                                                     <th>RFID Code</th>
-                                                    <th>Form</th>
                                                     <th>Enter Time</th>
                                                     <th></th>
                                                 </tr>
@@ -174,7 +173,6 @@ $totalAbsent = $totalStudent['total'] - $totalAttend['total'];
                                                     <th>Name</th>
                                                     <th>Class</th>
                                                     <th>RFID Code</th>
-                                                    <th>Form</th>
                                                     <th>Enter Time</th>
                                                     <th></th>
                                                 </tr>
@@ -274,20 +272,26 @@ $totalAbsent = $totalStudent['total'] - $totalAttend['total'];
 
                     // For List Attend
                     var listAttend = response.listAttend;
-                    console.log(listAttend);
                     var getlenght = listAttend.length - 1;
                     html = '';
-                    for (var i = getlenght; i >= 0; i--) {
+                    console.log(getlenght);
+
+                    if(getlenght > -1){
+                        for (var i = getlenght; i >= 0; i--) {
+                            html += '<tr>';
+                            html += '<td>' + listAttend[i].name + '</td>';
+                            html += '<td>' + listAttend[i].class + '</td>';
+                            html += '<td>' + listAttend[i].rfid + '</td>';
+                            html += '<td>' + listAttend[i].enter_time + '</td>';
+                            html +=
+                                '<td><a class="btn btn-danger btn-sm" href="controller.php?mod=forceExit&id=' +
+                                listAttend[i].id +
+                                '"><i class="fa fa-check-circle" style="font-size:24px"></i></a></td>';
+                            html += '<tr>';
+                        }
+                    } else {
                         html += '<tr>';
-                        html += '<td>' + listAttend[i].name + '</td>';
-                        html += '<td>' + listAttend[i].class + '</td>';
-                        html += '<td>' + listAttend[i].rfid + '</td>';
-                        html += '<td>' + listAttend[i].form + '</td>';
-                        html += '<td>' + listAttend[i].enter_time + '</td>';
-                        html +=
-                            '<td><a class="btn btn-danger btn-sm" href="controller.php?mod=forceExit&id=' +
-                            listAttend[i].id +
-                            '"><i class="fa fa-check-circle" style="font-size:24px"></i></a></td>';
+                        html += '<td colspan="5">No Data Found</td>';
                         html += '<tr>';
                     }
 
@@ -310,8 +314,7 @@ $totalAbsent = $totalStudent['total'] - $totalAttend['total'];
                         data: {
                             labels: ["Attend", "Absent"],
                             datasets: [{
-                                data: [response.totalAttend.total, response
-                                    .totalAbsent
+                                data: [response.totalAttend.total, response.totalAbsent
                                 ],
                                 backgroundColor: ['#1cc88a', '#E02D1B'],
                                 hoverBackgroundColor: ['#17a673', '#cc1e0e'],
