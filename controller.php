@@ -53,7 +53,7 @@ class controller{
 
 		public function sendNotificationTelegram($method, $data){
 
-			$BOT_TOKEN = "1949918111:AAHEuuIFMtRgC9HBXOdY7zyg2Qa1IM-qrjU";
+			$BOT_TOKEN = "";
 	
 			$url = "https://api.telegram.org/bot$BOT_TOKEN/$method";
 		
