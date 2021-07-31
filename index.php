@@ -9,7 +9,7 @@ if(!isset($_SESSION['user_id'])){
 
 $controller = new controller();
 $conn = $controller->open();
-$logs = $controller->getListData($conn, "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL");
+$logs = $controller->getListData($conn, "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM logs LEFT JOIN students ON (logs.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL");
 $totalStudent = $controller->getCount($conn, 'students');
 $totalActiveNotification = $controller->getCount($conn, 'students', 'WHERE tele_id IS NOT NULL');
 $totalAttend = $controller->getCountAttend($conn);
