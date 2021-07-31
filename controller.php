@@ -53,14 +53,13 @@ class controller{
 
 		public function sendNotificationTelegram($method, $data){
 
-			$BOT_TOKEN = "";
+			$BOT_TOKEN = "1949918111:AAHEuuIFMtRgC9HBXOdY7zyg2Qa1IM-qrjU";
 	
 			$url = "https://api.telegram.org/bot$BOT_TOKEN/$method";
 		
 			if(!$curld = curl_init()){
 				exit;
 			}
-
 			curl_setopt($curld, CURLOPT_POST, true);
 			curl_setopt($curld, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($curld, CURLOPT_URL, $url);
@@ -113,7 +112,7 @@ class controller{
 			
 			if($student['tele_id'] != null){
 
-				$message = "Hai for your information, " . $student['name'] . " from class ". $student['class'] ." not scan for exit time. So sistem will update the data for exit time on : " . date("h:i:s a") . ", By ". $user['name'];
+				$message = "Hi for your information, " . $student['name'] . " from class ". $student['class'] ." didnt scan for exit time. So sistem will update the data for exit time on : " . date("h:i:s a") . ", By ". $user['name'];
 				// $message = "asdas";
 				$param = array(
 					"chat_id" => $student['tele_id'],
@@ -153,7 +152,7 @@ class controller{
 				// If already set for notification
 				if($student['tele_id'] != null){
 
-					$message = "Hai, " . $student['name'] . " from class ". $student['class'] ." exit from school at : " . date("h:i:s a");
+					$message = "Hi, " . $student['name'] . " from class ". $student['class'] ." has exit from school at : " . date("h:i:s a");
 
 					$param = array(
 						"chat_id" => $student['tele_id'],
@@ -173,7 +172,7 @@ class controller{
 				// If already set for notification
 				if($student['tele_id'] != null){
 
-					$message = "Hai, " . $student['name'] . " from class ". $student['class'] ." arrive at school at : " . date("h:i:s a");
+					$message = "Hi, " . $student['name'] . " from class ". $student['class'] ." arrived at school at : " . date("h:i:s a");
 
 					$param = array(
 						"chat_id" => $student['tele_id'],
@@ -358,9 +357,9 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "stem-project";
+			$dbname = "ProjectStem";
 			$username = "root";
-			$password = "root";
+			$password = "";
 
 			try {
 			    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
