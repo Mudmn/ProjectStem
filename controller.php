@@ -53,7 +53,7 @@ class controller{
 
 		public function sendNotificationTelegram($method, $data){
 
-			$BOT_TOKEN = "1949918111:AAHEuuIFMtRgC9HBXOdY7zyg2Qa1IM-qrjU";
+			$BOT_TOKEN = "";
 	
 			$url = "https://api.telegram.org/bot$BOT_TOKEN/$method";
 		
@@ -72,7 +72,7 @@ class controller{
 		public function overviewDashboard($conn){
 
 			$rows = array();
-			$sql = "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM LOGS LEFT JOIN students ON (LOGS.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL";
+			$sql = "SELECT logs.*, students.name AS name, students.class AS class, students.rfid AS rfid FROM logs LEFT JOIN students ON (logs.student_id = students.id) WHERE CAST(log_date AS DATE) = CAST( curdate() AS DATE) AND exit_time IS NULL";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute();
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -357,8 +357,8 @@ class controller{
 
 			$conn = "";
 			$servername = "localhost";
-			$dbname = "ProjectStem";
-			$username = "root";
+			$dbname = "";
+			$username = "";
 			$password = "";
 
 			try {

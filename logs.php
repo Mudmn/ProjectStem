@@ -10,7 +10,7 @@ if(!isset($_SESSION['user_id'])){
 $controller = new controller();
 $conn = $controller->open();
 
-$logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT JOIN students on (logs.student_id = students.id) WHERE logs.exit_time IS NOT NULL ORDER BY logs.log_date DESC");
+$logs = $controller->getListData($conn, "SELECT logs.*,students.*,DATE_FORMAT(log_date, '%d %M %Y') AS logDate FROM logs LEFT JOIN students on (logs.student_id = students.id) WHERE logs.exit_time IS NOT NULL ORDER BY logs.log_date DESC");
 ?>
 
 
@@ -82,6 +82,7 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <th>Name</th>
                                             <th>Class</th>
                                             <th>RFID Code</th>
+                                            <th>Date</th>
                                             <th>Enter Time</th>
                                             <th>Exit Time</th>
                                             <th>Remarks</th>
@@ -92,6 +93,7 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <th>Name</th>
                                             <th>Class</th>
                                             <th>RFID Code</th>
+                                            <th>Date</th>
                                             <th>Enter Time</th>
                                             <th>Exit Time</th>
                                             <th>Remarks</th>
@@ -105,6 +107,7 @@ $logs = $controller->getListData($conn, "SELECT logs.*,students.* FROM logs LEFT
                                             <td><?= $log['name'] ?></td>
                                             <td><?= $log['class'] ?></td>
                                             <td><?= $log['rfid'] ?></td>
+                                            <td><?= $log['logDate'] ?></td>
                                             <td><?= $log['enter_time'] ?></td>
                                             <td><?= $log['exit_time'] ?></td>
                                             <td><?= $log['remark'] ?></td>

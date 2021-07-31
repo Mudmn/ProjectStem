@@ -20,7 +20,7 @@
 
     <style>
         .bg-image {
-            background: url(https://scontent.fkul8-1.fna.fbcdn.net/v/t1.18169-9/11242780_1614244585509875_2839946622822169584_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFRy1cgWVxXGErZdbkR694ORPesySRGNXtE96zJJEY1e4ys5dtESwsJAdsFDS7JlLVgEbBVHxHxYJrKFbOLbI-H&_nc_ohc=CoTD1sNlxXwAX_ZbBg0&_nc_ht=scontent.fkul8-1.fna&oh=e2f842a6c48bcc306fba36b6d469a836&oe=60FE0648);
+            background: url('img/logo.jpg');
             background-position: center;
             background-size: 422px;
         }
